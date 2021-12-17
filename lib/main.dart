@@ -12,27 +12,44 @@ class PerguntasApp extends StatefulWidget {
 }
 
 class _PerguntasAppState extends State<PerguntasApp> {
+  var _pontuacaoTotal = 0;
   final List<Map<String, Object>> _perguntas = [
     {
       'texto': 'Qual seu animal favorito?',
-      'respostas': ['Gato', 'Cachorro', 'Cobra', 'Elefante']
+      'respostas': [
+        {'texto': 'Gato', 'pontuacao': 10},
+        {'texto': 'Cachorro', 'pontuacao': 8},
+        {'texto': 'Cobra', 'pontuacao': 4},
+        {'texto': 'Elefante', 'pontuacao': 6}
+      ]
     },
     {
       'texto': 'Qual sua cor favorita?',
-      'respostas': ['Azul', 'Preto', 'Amarelo', 'Roxo']
+      'respostas': [
+        {'texto': 'Azul', 'pontuacao': 10},
+        {'texto': 'Preto', 'pontuacao': 8},
+        {'texto': 'Amarelo', 'pontuacao': 3},
+        {'texto': 'Roxo', 'pontuacao': 6},
+      ]
     },
     {
       'texto': 'Qual seu time favorito?',
-      'respostas': ['Corinthians', 'São Paulo', 'Palmeiras', 'Santos']
+      'respostas': [
+        {'texto': 'Corinthians', 'pontuacao': 10},
+        {'texto': 'São Paulo', 'pontuacao': 4},
+        {'texto': 'Palmeiras', 'pontuacao': 6},
+        {'texto': 'Santos', 'pontuacao': 8},
+      ]
     }
   ];
 
   var _perguntaSelecionada = 0;
 
-  void _responder() {
+  void _responder(int pontuacao) {
     if (temPerguntaSelecionada) {
       setState(() {
         _perguntaSelecionada++;
+        _pontuacaoTotal += pontuacao;
       });
     }
   }
@@ -55,7 +72,7 @@ class _PerguntasAppState extends State<PerguntasApp> {
                   perguntaSelecionada: _perguntaSelecionada,
                   responder: _responder,
                 )
-              : const Resultado()),
+              : Resultado(pontuacaoTotal: _pontuacaoTotal)),
     );
   }
 }
